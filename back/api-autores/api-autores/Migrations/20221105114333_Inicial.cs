@@ -28,7 +28,8 @@ namespace api_autores.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     titulo = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     estado = table.Column<bool>(type: "bit", nullable: false),
-                    autorcodigoautor = table.Column<int>(type: "int", nullable: false)
+                    codigoautor = table.Column<int>(type: "int", nullable: false),
+                    autorcodigoautor = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -38,7 +39,7 @@ namespace api_autores.Migrations
                         column: x => x.autorcodigoautor,
                         principalTable: "Autor",
                         principalColumn: "codigoautor",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

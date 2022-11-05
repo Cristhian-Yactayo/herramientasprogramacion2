@@ -11,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace api_autores
@@ -27,7 +28,7 @@ namespace api_autores
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            //agregamos una opcion para la serializacion de JSON
             services.AddControllers();
 
             //agregamos la conexion a la base de datos
