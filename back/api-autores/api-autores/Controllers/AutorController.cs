@@ -33,7 +33,7 @@ namespace api_autores.Controllers
         [HttpGet("custom")]
         public async Task<ActionResult<List<Autor>>> findAllCustom()
         {
-            return await context.Autor.Where(x=> x.estado==true).ToListAsync();
+            return await context.Autor.Where(x => x.estado == true).ToListAsync();
         }
 
         //cuando queremos guardar informacion
@@ -51,7 +51,15 @@ namespace api_autores.Controllers
         {
             var autor = await context.Autor
                 .FirstOrDefaultAsync(x => x.codigoautor == id);
-            return autor;
+            if (autor == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return autor;
+            }
+
 
         }
 
@@ -59,7 +67,7 @@ namespace api_autores.Controllers
         [HttpPut("{id:int}")]
         public async Task<ActionResult> update(Autor a, int id)
         {
-            if(a.codigoautor!= id)
+            if (a.codigoautor != id)
             {
                 return BadRequest("No se encuentro el codigo correspondiente");
             }
@@ -101,3 +109,5 @@ namespace api_autores.Controllers
 
     }
 }
+
+

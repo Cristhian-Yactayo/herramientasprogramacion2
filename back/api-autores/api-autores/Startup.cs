@@ -38,6 +38,15 @@ namespace api_autores
                     )
                 );
 
+            services.AddCors(options =>{
+                var frontendurl = Configuration.GetValue<string>("frontend_url");
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins(frontendurl).AllowAnyMethod().AllowAnyHeader()
+;
+                });
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "api_autores", Version = "v1" });
@@ -57,6 +66,8 @@ namespace api_autores
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 
